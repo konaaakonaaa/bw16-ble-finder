@@ -57,7 +57,7 @@ volatile bool     everFound  = false;
 
 bool isTargetDevice() {
   if (strlen(TARGET_MAC) > 0) {
-    return foundDevice.getAddr().str().equalsIgnoreCase(TARGET_MAC);
+return String(foundDevice.getAddr().str()).equalsIgnoreCase(TARGET_MAC);
   }
   if (foundDevice.hasName()) {
     return foundDevice.getName() == String(TARGET_NAME);
