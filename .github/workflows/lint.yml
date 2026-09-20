@@ -1,0 +1,29 @@
+name: Basic checks
+
+# Полноценная сборка под BW16 (AmebaD) в CI не настроена, т.к. требует
+# установки закрытого board-пакета Realtek внутри раннера. Этот workflow
+# просто проверяет базовые вещи: наличие обязательных файлов и то, что
+# .ino файлы не пустые. При желании можно доработать до полноценной
+# компиляции через arduino-cli + board index Realtek AmebaD.
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  sanity-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required files exist
+        run: |
+          test -f README.md
+          test -f LICENSE
+          test -f src/ble_item_finder.ino
+
+      - name: Check .ino files are non-empty
+        run: |
+          find . -name "*.ino" -print0 | xargs -0 -I{} sh -c 'test -s "{}" || (echo "Empty file: {}" && exit 1)'

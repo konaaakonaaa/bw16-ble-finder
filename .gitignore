@@ -1,0 +1,15 @@
+# Сборочные артефакты Arduino IDE
+build/
+*.bin
+*.elf
+*.map
+*.hex
+
+# Кэши IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
